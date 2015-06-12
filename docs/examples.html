@@ -32,6 +32,8 @@
 
           $('#no-global-co').clickover({ global_close: false });
 
+          $('#ignore-global-co').clickover({ global_close: false });
+
           $('#shown-co').clickover({
             onShown: function () { alert("Hello from clickover"); }
           });
@@ -202,6 +204,20 @@
           <p> To change the defaults for the page do the following: 
           <pre>
           $().clickover.defaults.<i>option_name</i>
+          </pre>
+          </p>
+
+          <h3>Disable global_close temporarily</h3>
+          <p> Sometimes you want the global_close option, but when some modal is
+          shown overtop your popover you want to make sure that the popover
+          stays open until the modal goes away.
+          </p>
+          <pre>
+          $(your_element).data().clickover.ignore_global_close(true)
+          </pre>
+          when you are done, re-enable global close:
+          <pre>
+          $(your_element).data().clickover.ignore_global_close(false)
           </pre>
           </p>
 

@@ -24,12 +24,17 @@
 
     constructor: Clickover
 
+    , ignore_global_close: function( ignore ) {
+        this.attr.ignore_global_close = ignore;
+      }
+
     , cinit: function( type, element, options ) {
       this.attr = {};
 
       // choose random attrs instead of timestamp ones
       this.attr.me = ((Math.random() * 10) + "").replace(/\D/g, '');
       this.attr.click_event_ns = "click." + this.attr.me + " touchstart." + this.attr.me;
+      this.attr.ignore_global_close = false;
 
       if (!options) options = {};
 
@@ -73,7 +78,7 @@
         // close on global request, exclude clicks inside clickover
         this.options.global_close &&
           $('body').on( this.attr.click_event_ns, function(e) {
-            if ( !that.tip().has(e.target).length ) { that.clickery(); }
+            if ( !that.attr.ignore_global_close && !that.tip().has(e.target).length ) { that.clickery(); }
           });
 
         this.options.esc_close && $(document).bind('keyup.clickery', function(e) {
